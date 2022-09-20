@@ -4,15 +4,13 @@ var alphabet = ["A","B","C",
 "U","V","W","X","Y","Z"];
 const URL = "https://random-word-api.herokuapp.com/word";
 
-function printBtn(c){
-    for (var i = 0; i < c.length; i++){
-        $('.letters').append('<button value='+ c[i] + '>' + '</button>');
-    }
+function printBtn(){
+    for (i = 0; i < alphabet.length; i++){
+  document.getElementById('letter').innerHTML +=
+   '<button id="' + alphabet[i] + '"onclick="getLetter()">'  + alphabet[i] + '</button>';
+ }
 }
-printBtn(alphabet);
-
-async function getWord(URL){
-    const response = await fetch(URL);
-    console.log(response);
+function getLetter(){
+    console.log();
 }
-getWord.type(URL);
+printBtn();
