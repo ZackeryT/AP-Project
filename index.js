@@ -27,6 +27,8 @@ var alphabet = [
   "Z",
 ];
 var storedguess = [];
+var numlives = 10;
+var counter = 0;
 var lives = document.getElementById("lives");
 const URL = "https://random-word-api.herokuapp.com/word";
 
@@ -58,31 +60,54 @@ async function getWord() {
 
 getWord();
 
+function getlives() {
+  lives.innerHTML = "You have " + numlives + " lives";
+  if (numlives < 1) {
+    lives.innerHTML =
+      "Game Over, Your word was " +
+      window.localStorage.getItem("word") +
+      ". Refresh to play again!";
+  }
+  for (i = 0; i < storedguess.length; i++) {
+    if (counter === storedguess.length) {
+      lives.innerHTML = "You Win! Refresh to play again";
+    }
+  }
+}
 function printBtn() {
   for (i = 0; i < alphabet.length; i++) {
     document.getElementById("letter").innerHTML +=
       '<button id="' +
       alphabet[i] +
-      '" onclick="onClick(this.innerHTML)">' +
+      '" onclick="onClick(this.innerHTML, this)">' +
       alphabet[i] +
       "</button>";
   }
 }
 
-function onClick(clicked_id) {
+function onClick(clicked_id, button) {
   console.log(clicked_id);
+  console.log(button);
+  button.parentNode.removeChild(button);
   var geuss = clicked_id;
   var word = window.localStorage.getItem("word");
   console.log(storedguess);
   for (var i = 0; i < word.length; i++) {
     if (word[i] === geuss) {
       storedguess[i].innerHTML = geuss;
-    }
-    var j = word.indexOf(geuss);
-    if (j === -1) {
-      console.log("not there");
+      counter += 1;
+      console.log(counter);
     }
   }
+  var j = word.indexOf(geuss);
+  console.log(j);
+  if (j === -1) {
+    numlives -= 1;
+    getlives();
+    console.log("not there");
+  } else {
+    getlives();
+  }
 }
-
+getlives();
 printBtn();
