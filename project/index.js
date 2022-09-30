@@ -70,7 +70,7 @@ function getlives() {
   }
   for (i = 0; i < storedguess.length; i++) {
     if (counter === storedguess.length) {
-      lives.innerHTML = "You Win! Refresh to play again";
+      lives.innerHTML = "You Win! Refresh to play again!";
     }
   }
 }
