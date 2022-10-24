@@ -26,6 +26,7 @@ var alphabet = [
   "Y",
   "Z",
 ];
+
 var storedguess = [];
 var numlives = 10;
 var counter = 0;
@@ -74,6 +75,7 @@ function getlives() {
     }
   }
 }
+
 function printBtn() {
   for (i = 0; i < alphabet.length; i++) {
     document.getElementById("letter").innerHTML +=
@@ -95,8 +97,6 @@ function onClick(clicked_id, button) {
   for (var i = 0; i < word.length; i++) {
     if (word[i] === geuss) {
       storedguess[i].innerHTML = geuss;
-      counter += 1;
-      console.log(counter);
     }
   }
   var j = word.indexOf(geuss);
@@ -109,5 +109,6 @@ function onClick(clicked_id, button) {
     getlives();
   }
 }
+
 getlives();
 printBtn();
